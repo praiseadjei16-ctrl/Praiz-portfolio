@@ -1,0 +1,56 @@
+body {
+    font-family: var(--font-secondary);
+    color: var(--color-text);
+    line-height: 1.5;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, .hero-title, .section-title {
+    font-family: var(--font-primary);
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+    text-transform: none; /* Let components dictate uppercase/lowercase */
+}
+
+h1 {
+    font-size: clamp(4rem, 15vw, 10rem);
+}
+
+h2 {
+    font-size: clamp(3rem, 8vw, 5rem);
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+p {
+    margin-bottom: var(--space-4);
+    color: var(--color-muted);
+}
+
+.text-muted {
+    color: var(--color-muted);
+}
+
+.text-accent {
+    color: var(--color-accent);
+}
+
+a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-accent);
+}

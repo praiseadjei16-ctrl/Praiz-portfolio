@@ -1,0 +1,38 @@
+:root {
+    /* Dark Mode Aesthetic */
+    --color-bg: #0A0A0A; /* Main black background */
+    --color-bg-alt: #111111; /* Slightly lighter for contrast */
+    --color-bg-dark: #000000; /* Pure black */
+    
+    --color-text: #FFFFFF;
+    --color-muted: rgba(255, 255, 255, 0.6);
+    --color-grid: rgba(255, 255, 255, 0.1); /* Subtle grid lines */
+    
+    --color-accent: #FF5E14; /* Vibrant Orange */
+    --color-accent-hover: #E04E0C;
+    --color-selection: #FF5E14;
+    
+    /* Hero Specific Colors */
+    --color-hero-bg: #E84E1B;
+    --color-hero-grid: rgba(255, 255, 255, 0.2);
+    
+    --font-primary: "Outfit", sans-serif;
+    --font-secondary: "Inter", sans-serif;
+    
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 16px;
+    --space-4: 24px;
+    --space-5: 32px;
+    --space-6: 48px;
+    --space-7: 64px;
+    --space-8: 96px;
+    --space-9: 128px;
+    
+    /* Editorial edges */
+    --radius-soft: 4px; 
+    --radius-pill: 999px; 
+    
+    --ease-bouncy: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+}
