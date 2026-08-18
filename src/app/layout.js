@@ -22,9 +22,9 @@ export const metadata = {
     siteName: "Praiz Portfolio",
     images: [
       {
-        url: "/portrait.jpg",
-        width: 800,
-        height: 600,
+        url: "/OG-Image.png",
+        width: 1200,
+        height: 630,
       },
     ],
     locale: "en-US",

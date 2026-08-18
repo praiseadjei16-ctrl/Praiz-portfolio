@@ -49,8 +49,8 @@ export default function Contact() {
             
             <ScrollReveal delay={0.3}>
               <div className="cta-buttons">
-                <a href="mailto:hello@example.com" className="cta-btn">START A PROJECT</a>
-                <a href="#" className="cta-btn">SAY HELLO</a>
+                <a href="mailto:praiseadjei16@gmail.com?subject=New%20Project%20Inquiry" className="cta-btn">START A PROJECT</a>
+                <a href="https://wa.me/qr/TUGSIQOWP5N4J1" target="_blank" rel="noopener noreferrer" className="cta-btn">SAY HELLO</a>
               </div>
             </ScrollReveal>
           </div>
@@ -58,16 +58,16 @@ export default function Contact() {
           {/* Social Icons at Bottom */}
           <ScrollReveal delay={0.5} style={{ position: 'relative', zIndex: 10 }}>
             <div className="cta-socials" style={{ position: 'relative', zIndex: 10 }}>
-              <a href="#" aria-label="WhatsApp" className="cta-social-link">
+              <a href="https://wa.me/qr/TUGSIQOWP5N4J1" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="cta-social-link">
                 <Image src="/icons8-whatsapp-50.svg" alt="WhatsApp" width={50} height={50} />
               </a>
-              <a href="#" aria-label="Instagram" className="cta-social-link">
+              <a href="https://www.instagram.com/mrpraizee/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="cta-social-link">
                 <Image src="/icons8-instagram-50.svg" alt="Instagram" width={50} height={50} />
               </a>
-              <a href="#" aria-label="LinkedIn" className="cta-social-link">
+              <a href="https://www.linkedin.com/in/praise-adjei-9117193a6/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="cta-social-link">
                 <Image src="/icons8-linkedin-50.svg" alt="LinkedIn" width={50} height={50} />
               </a>
-              <a href="#" aria-label="TikTok" className="cta-social-link">
+              <a href="https://www.tiktok.com/@mr_pp14?_r=1&_t=ZS-95vNL4BBVbA" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="cta-social-link">
                 <Image src="/icons8-tiktok-50.svg" alt="TikTok" width={50} height={50} />
               </a>
             </div>
