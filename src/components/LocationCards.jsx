@@ -183,7 +183,7 @@ export default function LocationCards() {
       <div className="split-statement__right">
         <div className="split-statement__img-wrap" style={{ overflow: "hidden" }}>
           <Image
-            src="/creative-panel.jpg"
+            src="/A brand.png"
             alt="Creative direction — design tools and process"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
