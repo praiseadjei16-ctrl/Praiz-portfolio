@@ -29,7 +29,6 @@ export default function LocationCards() {
 
     // Sticky Wipe & Reveal (Pinned)
     gsap.set(imgWrap, { clipPath: "inset(100% 0% 0% 0%)" });
-    gsap.set(img, { scale: 1.1 }); // 10% extra size (5% top, 5% bottom)
     
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -40,8 +39,7 @@ export default function LocationCards() {
         scrub: true
       }
     });
-    tl.to(imgWrap, { clipPath: "inset(0% 0% 0% 0%)", ease: "none" })
-      .fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: "none" }, "<");
+    tl.to(imgWrap, { clipPath: "inset(0% 0% 0% 0%)", ease: "none" });
       
     gsap.to(textBlock, {
       yPercent: -15, // Subtle parallax for the text
