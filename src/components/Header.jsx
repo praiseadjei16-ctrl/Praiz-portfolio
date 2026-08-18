@@ -17,6 +17,7 @@ export default function Header() {
     const menuButton = menuButtonRef.current;
 
     document.body.style.overflow = "hidden";
+    document.body.classList.add("menu-open");
     requestAnimationFrame(() => firstFocusable?.focus());
 
     const handleKeyDown = (event) => {
@@ -39,6 +40,7 @@ export default function Header() {
 
     return () => {
       document.body.style.overflow = previousOverflow;
+      document.body.classList.remove("menu-open");
       document.removeEventListener("keydown", handleKeyDown);
       menuButton?.focus();
     };
@@ -51,7 +53,7 @@ export default function Header() {
       <header className="site-header" id="site-header">
         
         <style dangerouslySetInnerHTML={{__html: `
-          .site-header { transition: padding 0.3s ease; }
+          .site-header { transition: padding 0.3s ease; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
           .nav-container { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 100%; position: relative; padding: 1rem 2rem; height: 80px; }
           .nav-link { transition: color 0.3s ease; }
           .nav-link-inner { transform: translateY(100%); }
@@ -74,12 +76,18 @@ export default function Header() {
              pointer-events: auto;
              background: #1a1a1a; color: white; border-radius: 50px; padding: 0.5rem 1.5rem; font-weight: 800; border: none; cursor: pointer;
              letter-spacing: 1px; font-size: 0.8rem;
-             box-shadow: 0 10px 20px rgba(0,0,0,0.15);
              transition: background 0.3s ease;
              opacity: 0;
              transform: translateY(-50%) scale(0);
           }
           .hamburger-btn:hover { background: #ff5e00; }
+          .hamburger-btn.is-active {
+             background: #ffffff;
+             color: #1a1a1a;
+          }
+          .hamburger-btn.is-active:hover {
+             background: #e0e0e0;
+          }
         `}} />
 
         <div className="nav-container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", pointerEvents: "none" }}>
@@ -96,7 +104,7 @@ export default function Header() {
           </nav>
 
           {/* Central Logo - ALWAYS present for GSAP to grab */}
-          <div className="header-logo" style={{ 
+          <Link href="/" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="header-logo" style={{ 
               opacity: 0, 
               backgroundColor: "#ff5e00", 
               color: "#1a1a1a", 
@@ -111,10 +119,11 @@ export default function Header() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              zIndex: 10
+              zIndex: 10,
+              textDecoration: "none"
           }}>
               PRAIZ<sup style={{ fontSize: "0.6em", marginLeft: "0.1em" }}>®</sup>
-          </div>
+          </Link>
 
           <Link href="#contact" className="mobile-header-cta">
             Start a Project
@@ -139,7 +148,7 @@ export default function Header() {
           <button
             ref={menuButtonRef}
             type="button"
-            className="hamburger-btn"
+            className={`hamburger-btn ${menuOpen ? "is-active" : ""}`}
             onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
             aria-controls="site-menu-drawer"
@@ -176,9 +185,6 @@ export default function Header() {
           aria-label="Site navigation"
           aria-hidden={!menuOpen}
         >
-          <button type="button" className="drawer-close" onClick={closeMenu}>
-            CLOSE
-          </button>
           <Link href="#hero" className="drawer-link" onClick={closeMenu}>HOME</Link>
           <Link href="#about" className="drawer-link" onClick={closeMenu}>ABOUT ME</Link>
           <Link href="#works" className="drawer-link" onClick={closeMenu}>PROJECTS</Link>
@@ -189,7 +195,7 @@ export default function Header() {
             .drawer-link {
               font-size: 2.5rem;
               font-weight: 800;
-              color: rgba(255,255,255,0.7);
+              color: #ffffff;
               text-decoration: none;
               text-transform: uppercase;
               font-family: var(--font-primary);
@@ -199,11 +205,6 @@ export default function Header() {
             .drawer-link:hover {
               color: #ff5e00;
               transform: translateX(10px);
-            }
-            @media (max-width: 900px) {
-              .drawer-link {
-                color: rgba(17,17,17,0.7);
-              }
             }
           `}} />
         </div>

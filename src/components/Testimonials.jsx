@@ -9,47 +9,30 @@ const testimonials = [
     id: 1,
     rating: 5.0,
     quote:
-      "Collaborating on this project was seamless. The vision was clearly understood, and the designs genuinely reflect my brand identity.",
-    author: "Will Smith",
-    role: "Harper Education",
-    image: "https://i.pravatar.cc/150?u=will", // placeholder avatar
+      "Praiz has a knack for turning fuzzy ideas into creative masterpieces. He has a rare touch for delivering high-end work under a pressing deadline without compromising on quality. What makes working with Praiz fun is his collaborative nature and openness to constructive feedback. If you're looking for a creative who exceeds expectations and captures your audience's attention, he's the right one.",
+    author: "I.B Gyansah",
+    role: "Founder, Reinvent Africa Network",
+    image: "/Isaac B. Gyansah.jpeg",
   },
   {
     id: 2,
-    rating: 4.7,
+    rating: 5.0,
     quote:
-      "Working with this process was effortless. The vision was understood perfectly, and the designs truly represent my brand.",
-    author: "Ikta Sollork",
-    role: "PARAL CEO",
-    image: "https://i.pravatar.cc/150?u=ikta",
+      "Before working with Praiz, I struggled with how to advertise Onyx in a way that actually captured what we do. I came to him with rough, half-formed ideas, and he took that and turned it into a motion graphics ad that was honestly unbelievable. The final piece was sharp, creative, and completely elevated what I originally had in mind. After we put the ad out, I got so much praise for how good it looked. Praiz doesn't just execute, he refines and improves on your vision.",
+    author: "Darius Asante",
+    role: "Founder, Onyx Automation Agency",
+    image: "/Founder-Darius Asante.jpg",
   },
   {
     id: 3,
-    rating: 4.9,
-    quote:
-      "A truly transformative partnership. The end result exceeded all of our expectations and has set a new standard in our industry.",
-    author: "Alex Johnson",
-    role: "Innovate Tech",
-    image: "https://i.pravatar.cc/150?u=alex",
-  },
-  {
-    id: 4,
     rating: 5.0,
     quote:
-      "Absolutely brilliant. From the initial concepts to the final delivery, the attention to detail and design thinking was world-class.",
-    author: "Samantha Lee",
-    role: "VP Marketing, Stellar",
-    image: "https://i.pravatar.cc/150?u=samantha",
+      "Absolutely amazing work! The motion graphics were clean, creative, and professionally done. He took my ideas and turned them into something even better than I imagined. The final result made my work look far more polished and professional.",
+    author: "Jeremy Eshun",
+    role: "Digital Media Manager, Aura Family Dental Care",
+    image: "/Jeremy Eshun.jpg",
   },
-  {
-    id: 5,
-    rating: 4.8,
-    quote:
-      "A fantastic collaborator who knows how to translate complex business requirements into sleek, user-friendly digital experiences.",
-    author: "Marcus Vance",
-    role: "Director of Product, Nexus",
-    image: "https://i.pravatar.cc/150?u=marcus",
-  },
+
 ];
 
 export default function Testimonials() {

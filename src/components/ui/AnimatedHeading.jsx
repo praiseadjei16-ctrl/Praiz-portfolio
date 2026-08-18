@@ -23,8 +23,8 @@ export default function AnimatedHeading({
   style,
   className,
   mobileBreakBefore,
-  stagger = 0.04,
-  accentDelay = 0.8,
+  stagger = 0.1,
+  accentDelay = 1.0,
   viewportMargin = "-80px",
 }) {
   const motionProfile = useMotionProfile();
@@ -55,7 +55,7 @@ export default function AnimatedHeading({
                 visible: {
                   opacity: 1,
                   y: 0,
-                  transition: { duration: light ? 0.35 : 0.5, ease: "easeOut" },
+                  transition: { duration: light ? 0.35 : 0.8, ease: "easeOut" },
                 },
               }}
             >
@@ -78,7 +78,7 @@ export default function AnimatedHeading({
               visible: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: light ? 0.35 : 0.5, ease: "easeOut" },
+                transition: { duration: light ? 0.35 : 0.8, ease: "easeOut" },
               },
             }}
           >
@@ -99,7 +99,7 @@ export default function AnimatedHeading({
                   scaleX: 1,
                   transition: {
                     delay: light ? Math.min(accentDelay, 0.25) : accentDelay,
-                    duration: light ? 0.45 : 1.2,
+                    duration: light ? 0.45 : 1.5,
                     ease: "easeInOut",
                   },
                 },

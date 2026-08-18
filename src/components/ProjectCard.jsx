@@ -6,10 +6,11 @@ import { ArrowUpRight } from "lucide-react";
 export default function ProjectCard({ project, index, onOpen }) {
   const cardRef = useRef(null);
   const videoRef = useRef(null);
+  const isVideo = project.type === "video" && project.videoUrl;
   const posterImage = project.type === "image" ? project.image : null;
 
   useEffect(() => {
-    if (project.type !== "video" || !project.videoUrl) return undefined;
+    if (!isVideo) return undefined;
 
     const card = cardRef.current;
     const video = videoRef.current;
@@ -28,11 +29,6 @@ export default function ProjectCard({ project, index, onOpen }) {
       observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            if (!video.getAttribute("src")) {
-              video.src = video.dataset.src;
-              video.load();
-            }
-
             if (!reducedMotionQuery.matches) {
               video.play().catch(() => undefined);
             }
@@ -54,28 +50,17 @@ export default function ProjectCard({ project, index, onOpen }) {
       observer?.disconnect();
       video.pause();
     };
-  }, [project.type, project.videoUrl]);
+  }, [isVideo]);
 
   const handleMouseEnter = () => {
-    if (project.type === "video" && videoRef.current) {
-      const video = videoRef.current;
-
-      // Keep below-the-fold project media off the initial loading path. The
-      // source is attached only when the visitor asks to preview the project.
-      if (!video.getAttribute("src")) {
-        video.src = video.dataset.src;
-        video.load();
-      }
-
-      video.play().catch(e => console.log("Video play error:", e));
+    if (isVideo && videoRef.current) {
+      videoRef.current.play().catch(e => console.log("Video play error:", e));
     }
   };
 
   const handleMouseLeave = () => {
-    if (project.type === "video" && videoRef.current) {
+    if (isVideo && videoRef.current) {
       videoRef.current.pause();
-      // Optional: reset to beginning
-      // videoRef.current.currentTime = 0;
     }
   };
 
@@ -84,21 +69,21 @@ export default function ProjectCard({ project, index, onOpen }) {
       ref={cardRef}
       id={`project-card-${project.id}`}
       data-flip-id={`project-${project.id}`}
-      className={`project-card-v2 ${project.isModal ? 'modal-active' : ''}`}
+      className={`project-card-v2 ${project.isModal ? 'modal-active' : ''} ${posterImage ? 'project-card-image' : ''}`}
       data-category={project.category}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={isVideo ? handleMouseEnter : undefined}
+      onMouseLeave={isVideo ? handleMouseLeave : undefined}
     >
       {/* Background Image / Video */}
       <div className="project-image-v2">
-        {project.type === "video" && project.videoUrl ? (
+        {isVideo ? (
           <video
             ref={videoRef}
-            data-src={project.videoUrl}
+            src={project.videoUrl}
             muted
             loop
             playsInline
-            preload="none"
+            preload="metadata"
             aria-hidden="true"
             className="project-hover-video"
           />
@@ -122,7 +107,8 @@ export default function ProjectCard({ project, index, onOpen }) {
         <div className="project-top-v2">
           <span className="project-number-v2">{(index + 1).toString().padStart(2, '0')}</span>
           <div className="project-tags-v2">
-            <span className="project-tag-v2">{project.features}</span>
+            <span className="project-tag-v2 project-tag-desktop">{project.features}</span>
+            <span className="project-tag-v2 project-tag-mobile">{project.mobileFeatures ?? project.features}</span>
             <span className="project-tag-v2">GSAP</span>
             <span className="project-tag-v2">{project.category}</span>
           </div>

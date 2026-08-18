@@ -78,7 +78,7 @@
   position: absolute;
   top: 18px;
   right: 18px;
-  z-index: 5;
+  z-index: 10;
   width: 44px;
   height: 44px;
   display: grid;
@@ -295,7 +295,8 @@
   }
 
   .details h2 {
-    font-size: clamp(2.45rem, 5.4vw, 3.35rem);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    hyphens: auto;
   }
 
   .projectCta {
@@ -326,26 +327,43 @@
   }
 
   .mediaStage {
+    position: sticky;
+    top: 0;
+    z-index: 5;
     width: 100%;
-    height: clamp(270px, 46svh, 430px);
+    height: auto;
     border: 0;
     border-radius: 0;
-    background:
-      radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.88), transparent 58%),
-      linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(238, 235, 226, 0.72)),
-      var(--viewer-bg);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    background: #000;
+  }
+
+  .video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .image {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
   }
 
   .details {
     position: relative;
-    min-height: calc(54svh + 24px);
-    margin-top: -24px;
+    z-index: 2;
+    min-height: 60svh;
+    margin-top: 0;
     overflow: visible;
     border-right: 0;
     border-bottom: 0;
     border-left: 0;
-    border-radius: 24px 24px 0 0;
-    box-shadow: 0 -18px 50px rgba(0, 0, 0, 0.24);
+    border-radius: 0;
+    box-shadow: none;
   }
 
   .closeButton {
@@ -368,9 +386,10 @@
   }
 
   .details h2 {
-    max-width: 92%;
-    font-size: clamp(2.65rem, 14vw, 4.2rem);
-    line-height: 0.9;
+    max-width: 100%;
+    font-size: clamp(1.6rem, 8vw, 2.4rem);
+    line-height: 1;
+    hyphens: auto;
   }
 
   .kicker {
@@ -413,14 +432,8 @@
 }
 
 @media (max-width: 390px) {
-  .mediaStage {
-    height: 40svh;
-  }
-
   .details {
-    min-height: calc(60svh + 20px);
-    margin-top: -20px;
-    border-radius: 20px 20px 0 0;
+    min-height: 60svh;
   }
 
   .detailsScroll {
@@ -429,7 +442,7 @@
   }
 
   .details h2 {
-    font-size: clamp(2.4rem, 13vw, 3.35rem);
+    font-size: clamp(1.4rem, 8vw, 1.8rem);
   }
 
   .projectCta {

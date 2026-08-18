@@ -6,9 +6,7 @@
 }
 
 .mobile-header-cta,
-.hamburger-grid,
-.menu-drawer,
-.menu-backdrop {
+.hamburger-grid {
   display: none;
 }
 
@@ -17,6 +15,10 @@
 }
 
 .project-title-mobile {
+  display: none;
+}
+
+.project-tag-mobile {
   display: none;
 }
 
@@ -159,11 +161,14 @@
     z-index: 998;
     opacity: 0;
     pointer-events: none;
+    transform: translateZ(0); /* Force HW acceleration */
     transition: opacity 0.4s ease;
   }
 
   .menu-backdrop.is-open {
     opacity: 1;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     pointer-events: auto;
   }
 
@@ -217,13 +222,17 @@
     background: #fff;
   }
 
-  .hero-ball,
+  .hero-ball {
+    display: none;
+    top: auto !important;
+    bottom: calc(max(64px, env(safe-area-inset-bottom)) + 30px) !important;
+  }
   .corner-text {
-    display: none !important;
+    display: none;
   }
 
   .hero-bg-text-wrapper {
-    transform: none !important;
+    transform: none;
   }
 
   .hero-bg-text {
@@ -290,6 +299,10 @@
     padding: 0.62rem 0.9rem !important;
     border-radius: 14px !important;
     font-size: 0.86rem !important;
+  }
+
+  .hero-buttons .hero-cta-primary {
+    font-weight: 600 !important;
   }
 
   .hero-buttons .hero-cta-primary,
@@ -446,8 +459,16 @@
     font-size: clamp(1.85rem, 8vw, 2.45rem);
   }
 
+  .tags-desktop {
+    display: none !important;
+  }
+  .tags-mobile {
+    display: block !important;
+  }
+
   .split-statement__tags {
     gap: 8px;
+    justify-content: flex-start;
   }
 
   .split-statement__tag {
@@ -594,9 +615,6 @@
     background: #111;
     color: #fff;
     border-color: #111;
-    box-shadow: 
-       0 4px 12px rgba(0, 0, 0, 0.15),
-       inset 0 1px 1px rgba(255, 255, 255, 0.2);
   }
 
   .filter-btn {
@@ -678,6 +696,14 @@
     display: inline;
   }
 
+  .project-tag-desktop {
+    display: none;
+  }
+
+  .project-tag-mobile {
+    display: inline;
+  }
+
   .project-desc-v2 {
     max-width: 92%;
     font-size: 0.82rem;
@@ -690,12 +716,6 @@
 
   .project-hover-video {
     display: block;
-  }
-
-  .project-card-v2 .project-image-v2 img.project-poster-image,
-  .project-card-v2:hover .project-image-v2 img.project-poster-image {
-    opacity: 1 !important;
-    transform: none !important;
   }
 
   /* Horizontal, layered expertise deck. */

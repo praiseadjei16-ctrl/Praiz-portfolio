@@ -29,7 +29,6 @@ export default function LocationCards() {
 
     // Sticky Wipe & Reveal (Pinned)
     gsap.set(imgWrap, { clipPath: "inset(100% 0% 0% 0%)" });
-    gsap.set(img, { scale: 1.1 }); // 10% extra size (5% top, 5% bottom)
     
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -40,8 +39,7 @@ export default function LocationCards() {
         scrub: true
       }
     });
-    tl.to(imgWrap, { clipPath: "inset(0% 0% 0% 0%)", ease: "none" })
-      .fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: "none" }, "<");
+    tl.to(imgWrap, { clipPath: "inset(0% 0% 0% 0%)", ease: "none" });
       
     gsap.to(textBlock, {
       yPercent: -15, // Subtle parallax for the text
@@ -66,7 +64,7 @@ export default function LocationCards() {
           whileInView="visible"
           viewport={{ once: motionProfile !== "full", margin: "-50px" }}
           variants={{
-            visible: { transition: { staggerChildren: 0.04 } },
+            visible: { transition: { staggerChildren: 0.1 } },
             hidden: {}
           }}
         >
@@ -76,7 +74,7 @@ export default function LocationCards() {
               style={{ display: 'inline-block', marginRight: '0.25em' }}
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
               }}
             >
               {word}
@@ -93,7 +91,7 @@ export default function LocationCards() {
             }}
             variants={{
               hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+              visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
             }}
           >
             <motion.span
@@ -109,43 +107,72 @@ export default function LocationCards() {
               }}
               variants={{
                 hidden: { scaleX: 0 },
-                visible: { scaleX: 1, transition: { delay: 0.8, duration: 1.2, ease: "easeInOut" } }
+                visible: { scaleX: 1, transition: { delay: 1.2, duration: 1.5, ease: "easeInOut" } }
               }}
             />
             <span style={{ position: 'relative', zIndex: 2 }}>needs to move</span>
           </motion.span>
         </motion.h2>
         
-        <motion.div 
-          className="split-statement__tags"
-          initial={motionProfile === "none" ? false : "hidden"}
-          whileInView="visible"
-          viewport={{ once: motionProfile !== "full", margin: "-50px" }}
-          variants={{
-            visible: { transition: { staggerChildren: 0.1, delayChildren: 0.6 } },
-            hidden: {}
-          }}
-        >
-          {tags.map((t, i) => (
-            <motion.span 
-              key={i} 
-              className="split-statement__tag"
-              variants={{
-                hidden: { opacity: 0, y: 15 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
-              }}
-              whileHover={motionProfile === "full" ? { 
-                y: -5, 
-                scale: 1.05, 
-                boxShadow: "0px 10px 20px rgba(0,0,0,0.15)",
-                transition: { duration: 0.2 }
-              } : undefined}
-              style={{ display: 'inline-block' }}
-            >
-              ✧ {t}
-            </motion.span>
-          ))}
-        </motion.div>
+        <div className="tags-desktop">
+          <motion.div 
+            className="split-statement__tags"
+            initial={motionProfile === "none" ? false : "hidden"}
+            whileInView="visible"
+            viewport={{ once: motionProfile !== "full", margin: "-50px" }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.2, delayChildren: 0.7 } },
+              hidden: {}
+            }}
+          >
+            {tags.map((t, i) => (
+              <motion.span 
+                key={i} 
+                className="split-statement__tag"
+                variants={{
+                  hidden: { opacity: 0, y: 15 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+                }}
+                whileHover={motionProfile === "full" ? { 
+                  y: -5, 
+                  scale: 1.05, 
+                  boxShadow: "0px 10px 20px rgba(0,0,0,0.15)",
+                  transition: { duration: 0.2 }
+                } : undefined}
+                style={{ display: 'inline-block' }}
+              >
+                ✧ {t}
+              </motion.span>
+            ))}
+          </motion.div>
+        </div>
+
+        <div className="tags-mobile">
+          <motion.div 
+            className="split-statement__tags"
+            initial={motionProfile === "none" ? false : "hidden"}
+            whileInView="visible"
+            viewport={{ once: motionProfile !== "full", margin: "-50px" }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.2, delayChildren: 0.8 } },
+              hidden: {}
+            }}
+          >
+            {tags.map((t, i) => (
+              <motion.span 
+                key={i} 
+                className="split-statement__tag"
+                variants={{
+                  hidden: { opacity: 0, y: 15 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+                }}
+                style={{ display: 'inline-block' }}
+              >
+                ✧ {t}
+              </motion.span>
+            ))}
+          </motion.div>
+        </div>
         
 
       </div>
@@ -154,7 +181,7 @@ export default function LocationCards() {
       <div className="split-statement__right">
         <div className="split-statement__img-wrap" style={{ overflow: "hidden" }}>
           <Image
-            src="/creative-panel.jpg"
+            src="/A brand.png"
             alt="Creative direction — design tools and process"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
