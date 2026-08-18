@@ -131,7 +131,7 @@ export default function Services() {
 
         .services-list-item {
           padding: 60px 0;
-          border-bottom: 1px solid rgba(255,255,255,0.1);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.12);
           cursor: pointer;
           transition: all 0.4s ease;
         }
@@ -160,7 +160,7 @@ export default function Services() {
         .services-list-desc {
           font-size: 1.1rem;
           line-height: 1.6;
-          color: rgba(255,255,255,0.7);
+          color: rgba(255, 255, 255, 0.6);
           max-width: 80%;
           margin: 0;
           font-family: var(--font-secondary);

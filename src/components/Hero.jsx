@@ -65,29 +65,92 @@ export default function Hero() {
       "(max-width: 900px) and (prefers-reduced-motion: no-preference)",
       () => {
         container.current?.classList.add("hero-ready");
-        const mobileIntro = gsap.timeline({ defaults: { ease: "power2.out" } });
+        
+        // Setup initial states like desktop
+        const siteHeader = document.getElementById("site-header");
+        if (siteHeader) gsap.set(siteHeader, { opacity: 0 }); // Hide header initially
+        
+        gsap.set(".hero-bg-text-wrapper", { y: "30vh" }); // Start low
+        
+        const praizSplit = new SplitType(".hero-bg-text", { types: "chars" });
+        gsap.set(praizSplit.chars, { opacity: 0, x: -30, filter: "blur(8px)" });
+        
+        gsap.set(".hero-portrait", { opacity: 0, scale: 0.92, filter: "blur(6px)", transformOrigin: "center bottom" });
+        
+        const headlineSplit = new SplitType(".hero-headline", { types: "lines" });
+        gsap.set(headlineSplit.lines, { opacity: 0, scale: 0.94, filter: "blur(8px)" });
+        
+        gsap.set(".mobile-only-card", { opacity: 0, filter: "blur(8px)" });
+        
+        const buttons = gsap.utils.toArray(".hero-buttons a");
+        gsap.set(buttons, { opacity: 0, scale: 0.94, filter: "blur(8px)" });
 
-        mobileIntro
-          .fromTo(
-            ".hero-bg-text",
-            { opacity: 0, y: 18 },
-            { opacity: 1, y: 0, duration: 0.55 }
-          )
-          .fromTo(
-            ".hero-portrait",
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.7 },
-            "-=0.3"
-          )
-          .fromTo(
-            [".mobile-only-card", ".hero-headline", ".hero-buttons a"],
-            { opacity: 0, y: 14 },
-            { opacity: 1, y: 0, duration: 0.45, stagger: 0.06 },
-            "-=0.25"
-          );
+        // Hero ball starts off-screen
+        gsap.set(".hero-ball", { y: "-100vh", scale: 1, opacity: 0, display: "block" });
+
+        const mobileIntro = gsap.timeline({ delay: 0.2 });
+
+        // Wavy fade-in for PRAIZ text
+        if (praizSplit.chars?.length) {
+          mobileIntro.to(praizSplit.chars, {
+            x: 0, opacity: 1, filter: "blur(0px)",
+            duration: 1.0, stagger: 0.12, ease: "power2.out"
+          });
+        }
+        
+        // Slide PRAIZ text to top
+        mobileIntro.to(".hero-bg-text-wrapper", { y: "0", duration: 1.2, ease: "power3.inOut" }, "-=0.2");
+
+        mobileIntro.addLabel("heroReveal", "-=0.1");
+
+        // The Anchor
+        mobileIntro.to(".hero-portrait", {
+          opacity: 1, scale: 1, filter: "blur(0px)",
+          duration: 1.2, ease: "power2.out"
+        }, "heroReveal");
+
+        // Glass Card
+        mobileIntro.to(".mobile-only-card", {
+          opacity: 1, filter: "blur(0px)",
+          duration: 1.0, ease: "power2.out"
+        }, "heroReveal+=0.4");
+        
+        // The Call to Action
+        if (buttons.length) {
+          mobileIntro.to(buttons, {
+            opacity: 1, scale: 1, filter: "blur(0px)",
+            duration: 0.9, stagger: 0.1, ease: "power2.out"
+          }, "heroReveal+=0.6");
+        }
+        
+        // Fade in header
+        if (siteHeader) {
+          mobileIntro.to(siteHeader, { opacity: 1, duration: 1.0, ease: "power2.out" }, "heroReveal+=0.6");
+        }
+
+        // The Ball Drops and bounces
+        const ballStart = mobileIntro.labels.heroReveal + 1.5;
+        mobileIntro.set(".hero-ball", { opacity: 1 }, ballStart)
+          .to(".hero-ball", { y: "0", duration: 0.8, ease: "power2.in" }, ballStart)
+          .to(".hero-ball", { y: "-15vh", duration: 0.4, ease: "power2.out" })
+          .to(".hero-ball", { y: "0", duration: 0.4, ease: "power2.in" })
+          .to(".hero-ball", { y: "-5vh", duration: 0.3, ease: "power2.out" })
+          .to(".hero-ball", { y: "0", duration: 0.3, ease: "power2.in" })
+          .to(".hero-ball", { scale: 100, opacity: 0, duration: 1.5, ease: "power3.out" })
+          .set(".hero-ball", { display: "none" });
+
+        // The Main Hook
+        if (headlineSplit.lines?.length) {
+          mobileIntro.to(headlineSplit.lines, {
+            opacity: 1, scale: 1, filter: "blur(0px)",
+            duration: 1.0, stagger: 0.15, ease: "power2.out"
+          }, ballStart + 2.2);
+        }
 
         return () => {
           mobileIntro.revert();
+          praizSplit.revert();
+          headlineSplit.revert();
           container.current?.classList.remove("hero-ready");
         };
       }
@@ -253,7 +316,7 @@ export default function Hero() {
     // 3. Shrink and move the giant PRAIZ text later
     scrollTl.fromTo(".hero-bg-text-wrapper", 
       { scale: 1, opacity: 1, filter: "blur(0px)" }, 
-      { scale: 0.15, yPercent: -40, opacity: 0, filter: "blur(4px)", duration: 1, ease: "power2.inOut" }, 
+      { scale: 0.2, yPercent: -45, opacity: 0, filter: "blur(4px)", duration: 0.8, ease: "power2.inOut" }, 
       1.0
     );
 
@@ -266,20 +329,20 @@ export default function Hero() {
         1.2
       );
 
-      // 5. Reveal the Logo at the center, then move it left
+      // 5. Reveal the Logo at the center exactly as the background text disappears
       const headerLogo = siteHeader.querySelector(".header-logo");
       if (headerLogo) {
         scrollTl.fromTo(headerLogo, 
-          { scale: 0.5, opacity: 0, left: "50%", xPercent: -50 },
-          { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.5)" }, 
-          1.7
+          { scale: 0.6, opacity: 0, left: "50%", xPercent: -50 },
+          { scale: 1, opacity: 1, duration: 0.5, ease: "power2.out" }, 
+          1.3
         );
         scrollTl.to(headerLogo, {
           left: "2rem",
           xPercent: 0,
           duration: 0.6,
           ease: "power2.inOut"
-        }, 2.2);
+        }, 1.9);
       }
 
       // 6. Vacuum effect for Nav Links
@@ -293,7 +356,7 @@ export default function Hero() {
           opacity: 0,
           duration: 0.6,
           ease: "power3.in"
-        }, 2.2);
+        }, 1.9);
       }
 
       // 7. Reveal Hamburger Menu Button
@@ -302,7 +365,7 @@ export default function Hero() {
         scrollTl.fromTo(hamburgerBtn,
           { opacity: 0, scale: 0, transformOrigin: "right center" },
           { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)" },
-          2.5 // Pops in just as the vacuum effect finishes
+          2.2 // Pops in just as the vacuum effect finishes
         );
       }
     }
@@ -389,11 +452,10 @@ export default function Hero() {
         </div>
 
         <div className="hero-buttons" style={{ position: "absolute", top: "92%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 10, display: "flex", gap: "1rem", justifyContent: "center", pointerEvents: "auto", width: "100%" }}>
-          <Link href="#works" className="hero-cta hero-cta-primary" style={{ backgroundColor: "#ff5e00", color: "#1a1a1a", padding: "0.75rem 1.5rem", borderRadius: "99px", fontWeight: 700, fontSize: "1rem", textDecoration: "none" }}>
+          <Link href="#works" className="hero-cta hero-cta-primary" style={{ backgroundColor: "#ff5e00", color: "#1a1a1a", padding: "0.75rem 1.5rem", borderRadius: "99px", fontWeight: 500, fontSize: "1rem", textDecoration: "none" }}>
             <span>View My Work</span>
-            <span className="hero-cta-arrow" aria-hidden="true">&#8599;</span>
           </Link>
-          <Link href="#about" className="hero-cta hero-cta-secondary" style={{ backgroundColor: "#ff5e00", color: "#1a1a1a", padding: "0.75rem 1.5rem", borderRadius: "99px", fontWeight: 700, fontSize: "1rem", textDecoration: "none" }}>
+          <Link href="#about" className="hero-cta hero-cta-secondary" style={{ backgroundColor: "#ff5e00", color: "#1a1a1a", padding: "0.75rem 1.5rem", borderRadius: "99px", fontWeight: 500, fontSize: "1rem", textDecoration: "none" }}>
             About Me
           </Link>
         </div>

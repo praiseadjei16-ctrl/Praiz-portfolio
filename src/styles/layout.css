@@ -51,7 +51,7 @@ body {
 
 /* --- Header --- */
 .site-header {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -61,6 +61,74 @@ body {
     padding: var(--space-4) var(--space-5);
     z-index: 1000;
     background: transparent;
+}
+
+/* --- Menu Drawer (Desktop) --- */
+.menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateZ(0); /* Force HW acceleration */
+    transition: opacity 0.4s ease;
+}
+
+.menu-backdrop.is-open {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    pointer-events: auto;
+}
+
+.menu-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 420px;
+    height: 100vh;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 3rem 4rem;
+    
+    /* Solid black panel */
+    background: #111111;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+    
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+}
+
+.menu-drawer.is-open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Blur the page content when the menu drawer is open */
+body.menu-open main,
+body.menu-open .nav-left,
+body.menu-open .nav-right,
+body.menu-open .header-logo,
+body.menu-open .mobile-header-cta {
+    filter: blur(6px);
+    transition: filter 0.4s ease;
+}
+
+main,
+.nav-left,
+.nav-right,
+.header-logo,
+.mobile-header-cta {
+    transition: filter 0.4s ease;
 }
 
 .brand-logo {
@@ -507,10 +575,17 @@ body {
     max-width: 540px;
 }
 
+.tags-desktop {
+  display: block;
+}
+.tags-mobile {
+  display: none;
+}
+
 .split-statement__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .split-statement__tag {
@@ -767,9 +842,6 @@ body {
     background: rgba(255, 255, 255, 0.9);
     color: #000;
     border-color: rgba(255, 255, 255, 1);
-    box-shadow: 
-       0 2px 8px rgba(255, 255, 255, 0.3),
-       inset 0 -1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* --- Projects Gallery (Dedicated Page) --- */
@@ -950,13 +1022,12 @@ body {
     z-index: 1;
 }
 
-.project-card-v2:hover .project-image-v2 img.project-poster-image {
-    opacity: 0;
-}
-
-.project-card-v2:hover .project-image-v2 img:not(.project-poster-image) {
+/* Video cards: subtle scale on hover */
+.project-card-v2:hover .project-hover-video {
     transform: scale(1.05);
 }
+
+/* Image cards: no hover effect on the image */
 
 .project-content-v2 {
     position: relative;
@@ -1147,14 +1218,16 @@ body {
 /* --- Services Accordion --- */
 .services-section {
     padding: var(--space-8) 0;
+    background: #fff;
+    color: #171714;
 }
 
 .accordion-item {
-    border-top: 1px solid var(--color-grid);
+    border-top: 1px solid rgba(23, 23, 20, 0.14);
 }
 
 .accordion-item:last-child {
-    border-bottom: 1px solid var(--color-grid);
+    border-bottom: 1px solid rgba(23, 23, 20, 0.14);
 }
 
 .accordion-header {
@@ -1165,7 +1238,7 @@ body {
     padding: var(--space-5) 0;
     background: transparent;
     border: none;
-    color: white;
+    color: inherit;
     cursor: pointer;
     font-family: var(--font-primary);
     font-size: 1.5rem;
@@ -1202,7 +1275,7 @@ body {
     padding-bottom: var(--space-5);
     display: flex;
     gap: var(--space-6);
-    color: var(--color-muted);
+    color: #68655e;
 }
 
 .accordion-inner img {
