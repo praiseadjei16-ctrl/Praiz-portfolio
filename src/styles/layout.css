@@ -116,18 +116,14 @@ body {
 /* Blur the page content when the menu drawer is open */
 body.menu-open main,
 body.menu-open .nav-left,
-body.menu-open .nav-right,
-body.menu-open .header-logo,
-body.menu-open .mobile-header-cta {
+body.menu-open .nav-right {
     filter: blur(6px);
     transition: filter 0.4s ease;
 }
 
 main,
 .nav-left,
-.nav-right,
-.header-logo,
-.mobile-header-cta {
+.nav-right {
     transition: filter 0.4s ease;
 }
 
