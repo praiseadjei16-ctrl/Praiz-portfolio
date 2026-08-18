@@ -108,7 +108,7 @@ export default function ProjectViewer({ project, onClose }) {
             </dl>
           </div>
 
-          <a className={styles.projectCta} href="mailto:hello@praiz.studio">
+          <a className={styles.projectCta} href="mailto:praiseadjei16@gmail.com?subject=New%20Project%20Inquiry">
             <span>
               <small>Have a project in mind?</small>
               Start a conversation
