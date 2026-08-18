@@ -12,13 +12,13 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-primary", weight: 
 const inter = Inter({ subsets: ["latin"], variable: "--font-secondary", weight: ["200", "300", "400", "500", "700"] });
 
 export const metadata = {
-  metadataBase: new URL("https://praiz-portfolio.com"),
+  metadataBase: new URL("https://praiz-portfolio.vercel.app"),
   title: "Praiz | Multidisciplinary Designer",
   description: "Ghana-based multidisciplinary designer specializing in graphic design, motion design, cinematography, and video editing.",
   openGraph: {
     title: "Praiz | Multidisciplinary Designer",
     description: "Graphic design, motion design, cinematography, and video editing crafted to help brands tell meaningful stories.",
-    url: "https://praiz-portfolio.com",
+    url: "https://praiz-portfolio.vercel.app",
     siteName: "Praiz Portfolio",
     images: [
       {
