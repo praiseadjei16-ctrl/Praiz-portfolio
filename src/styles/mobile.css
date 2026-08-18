@@ -107,6 +107,12 @@
     box-shadow: none !important;
   }
 
+  .mobile-header-cta:hover,
+  .mobile-header-cta:active,
+  .mobile-header-cta:focus {
+    color: #111;
+  }
+
   .hamburger-label {
     display: none;
   }
